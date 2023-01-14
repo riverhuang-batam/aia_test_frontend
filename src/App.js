@@ -4,9 +4,17 @@ import axios from "axios";
 
 function App() {
   const [datas, setDatas] = useState([]);
+  const [tagInput, setTagInput] = useState("");
   const getDatas = () => {
     axios
-      .get("http://localhost:4000/")
+      .get("http://localhost:4000/", { tag: "tags bro" })
+      .then((datas) => setDatas(datas.data))
+      .catch((err) => console.log(err));
+  };
+  const searchDatas = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:4000/", { tag: tagInput })
       .then((datas) => setDatas(datas.data))
       .catch((err) => console.log(err));
   };
@@ -15,8 +23,15 @@ function App() {
   }, []);
   return (
     <div>
-      {console.log(datas.items, "")}
-      <input />
+      <form onSubmit={searchDatas}>
+        <input
+          id="search"
+          type="text"
+          value={tagInput}
+          onChange={(event) => setTagInput(event.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       {datas.items?.map((item) => (
         <div>
           <img src={item.media.m} alt={item.media.m} />
