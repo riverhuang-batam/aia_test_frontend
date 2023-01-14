@@ -17,7 +17,7 @@ function App() {
     <div>
       {console.log(datas.items, "")}
       <input />
-      {datas.items.map((item) => (
+      {datas.items?.map((item) => (
         <div>
           <img src={item.media.m} alt={item.media.m} />
           <h1>{item.title}</h1>
