@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import SearchInput from './components/searchInput';
 import axios from "axios";
 import "./App.css";
 function App() {
@@ -45,26 +46,7 @@ function App() {
   return (
     <div className="text-center">
       <h2 className="mt-4">Imagx</h2>
-      <form onSubmit={searchDatas} className="form-group mb-4 mt-4 ">
-        <div className="input-group d-flex flex-row justify-content-center">
-          <div className="form-outline ">
-            <input
-              id="search"
-              type="text"
-              value={tagInput}
-              onChange={(event) => setTagInput(event.target.value)}
-              placeholder="search"
-              className="form-control"
-            />
-          </div>
-          <div className="">
-            <button type="submit" className="btn btn-primary">
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
-
+      <SearchInput onSubmit={searchDatas} setTagInput={setTagInput} tagInput={tagInput} />
       <nav aria-label="Page navigation example">
         <ul className="pagination justify-content-center">
           {datas.items && currentPage > 1 && (
