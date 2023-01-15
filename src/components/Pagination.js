@@ -1,4 +1,4 @@
-function SearchInput(props) {
+function Pagination(props) {
   
   const {currentPage, handleNextClick, handlePrevClick, handlePageClick, datas, minPageLimit, maxPageLimit} = props
   
@@ -59,4 +59,4 @@ function SearchInput(props) {
   );
 }
 
-export default SearchInput;
+export default Pagination;

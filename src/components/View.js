@@ -1,4 +1,4 @@
-function SearchInput(props) {
+function View(props) {
   const { datas, currentPage } = props;
   return (
     <>
@@ -15,4 +15,4 @@ function SearchInput(props) {
   );
 }
 
-export default SearchInput;
+export default View;

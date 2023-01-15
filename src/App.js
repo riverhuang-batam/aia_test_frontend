@@ -25,7 +25,7 @@ function App() {
       .then((datas) => {
         setDatas(datas.data)
         setMaxPageLimit(5)
-        setMinPageLimit(0)
+        setMinPageLimit(1)
       })
       .catch((err) => console.log(err));
   };
