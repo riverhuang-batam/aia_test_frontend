@@ -1,5 +1,8 @@
 ## show full list data when get data
-{datas.items?.map((item) => {
+u can add this on inside app.js component
+```
+{
+    datas.items?.map((item) => {
         return (
           <div>
             <img src={item.media.m} alt={item.media.m} />
@@ -8,4 +11,6 @@
             <p>{item.description}</p>
           </div>
         );
-      })}
+    })
+}
+```

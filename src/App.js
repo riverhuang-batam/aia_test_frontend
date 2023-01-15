@@ -27,7 +27,6 @@ function App() {
       setMaxPageLimit(maxPageLimit + pageNumberLimit);
       setMinPageLimit(minPageLimit + pageNumberLimit);
     }
-
     setCurrentPage((prevNum) => prevNum + 1);
   };
   const handlePrevClick = () => {
@@ -59,7 +58,6 @@ function App() {
             />
           </div>
           <div className="">
-
             <button type="submit" className="btn btn-primary">
               Search
             </button>
@@ -120,7 +118,6 @@ function App() {
           )}
         </ul>
       </nav>
-
       {datas.items && (
         <img
           src={datas.items[currentPage - 1]?.media.m}
