@@ -1,13 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-// import "./App.css";
 function SearchInput(props) {
-  
   const {onSubmit, tagInput, setTagInput} = props
-  console.log(onSubmit, '===')
   return (
     <div className="text-center">
-      <h2 className="mt-4">Imagx</h2>
       <form onSubmit={onSubmit} className="form-group mb-4 mt-4 ">
         <div className="input-group d-flex flex-row justify-content-center">
           <div className="form-outline ">

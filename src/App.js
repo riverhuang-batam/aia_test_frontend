@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import SearchInput from './components/searchInput';
+import SearchInput from './components/SearchInput';
+import Pagination from './components/Pagination'
+import View from './components/View';
 import axios from "axios";
 import "./App.css";
 function App() {
@@ -20,7 +22,11 @@ function App() {
     setCurrentPage(1);
     axios
       .post("http://localhost:4000/", { tag: tagInput })
-      .then((datas) => setDatas(datas.data))
+      .then((datas) => {
+        setDatas(datas.data)
+        setMaxPageLimit(5)
+        setMinPageLimit(0)
+      })
       .catch((err) => console.log(err));
   };
   const handleNextClick = () => {
@@ -38,8 +44,9 @@ function App() {
     setCurrentPage((prevNum) => prevNum - 1);
   };
   const handlePageClick = (pageNumber) => {
-    return setCurrentPage(pageNumber);
+    return setCurrentPage(pageNumber)
   };
+  const paginationSetupProps = {currentPage, handleNextClick, handlePrevClick, handlePageClick, datas, minPageLimit, maxPageLimit}
   useEffect(() => {
     getDatas();
   }, []);
@@ -47,68 +54,8 @@ function App() {
     <div className="text-center">
       <h2 className="mt-4">Imagx</h2>
       <SearchInput onSubmit={searchDatas} setTagInput={setTagInput} tagInput={tagInput} />
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          {datas.items && currentPage > 1 && (
-            <li className="page-item" onClick={() => handlePrevClick()}>
-              <a className="page-link" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-          )}
-          {datas.items && minPageLimit > 1 && (
-            <li className="page-item disabled">
-              <a className="page-link" href="#">
-                ...
-              </a>
-            </li>
-          )}
-
-          {datas.items?.map((data, index) => {
-            const pageNumber = index + 1;
-            if (pageNumber <= maxPageLimit && pageNumber >= minPageLimit) {
-              return (
-                <li
-                  className="page-item"
-                  onClick={() => handlePageClick(pageNumber)}
-                  key={pageNumber}
-                >
-                  <a
-                    className={`page-link ${
-                      currentPage == pageNumber && "active"
-                    }`}
-                  >
-                    {pageNumber}
-                  </a>
-                </li>
-              );
-            }
-          })}
-          {datas.items && datas.items.length > maxPageLimit && (
-            <li className="page-item disabled">
-              <a className="page-link" href="#">
-                ...
-              </a>
-            </li>
-          )}
-          {datas.items && currentPage < datas.items.length && (
-            <li className="page-item" onClick={() => handleNextClick()}>
-              <a className="page-link cursor-pointer" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          )}
-        </ul>
-      </nav>
-      {datas.items && (
-        <img
-          src={datas.items[currentPage - 1]?.media.m}
-          alt={datas.items[currentPage - 1]?.media.m}
-          className="mt-4"
-        />
-      )}
-      <h3>Title: {datas.items && datas.items[currentPage - 1]?.title}</h3>
-      <p>Tag: {datas.items && datas.items[currentPage - 1]?.tags}</p>
+      <Pagination {...paginationSetupProps}/>
+      <View datas={datas} currentPage={currentPage}/>
     </div>
   );
 }
